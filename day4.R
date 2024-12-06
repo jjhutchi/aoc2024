@@ -1,4 +1,4 @@
-# Day 3
+# Day 4
 
 # part I
 input = adventdrob::advent_input(day = 4, year = 2024, parse=F)
@@ -10,14 +10,13 @@ input
 # We can use th fact that this is a grid to pull out all the possible lines, and check each for XMAS 
 # using the reverse also as a pattern cuts the checking in half -> horiz, verti, diag U, diag D
 
-s = input$x
-
-# s = readLines("test4")
 pat = "XMAS|SAMX"
 
-# make grid so we can search through 
-G = matrix(unlist(strsplit(s, "")), nrow = length(s), byrow = TRUE)
 
+# make grid so we can search through 
+s = input$x
+# s = readLines("test4")
+G = matrix(unlist(strsplit(s, "")), nrow = length(s), byrow = TRUE)
 rows = nrow(G)
 cols = ncol(G)
 
@@ -71,7 +70,7 @@ for (r in 1:rows) {
   }
 }
 count
-# ans_grid # for viz the cases
+# ans_grid # for viz the cases, helpful to compare against the test case
 
 
 # Part II: 
@@ -79,7 +78,6 @@ count
 # Now we have it where we just need to check each point, and its surrounding corners. 
 # I saw others' solutions here, there are 4 possible corner configs, 
 # so we can grab the corners from any A, and check if its' corners are in our pattern
-
 
 # s = readLines("test4")
 s = input$x
