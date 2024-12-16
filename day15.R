@@ -13,9 +13,7 @@ G = input[1:50, ]
 G = strsplit(x = G$x, "") |> unlist() |> matrix(ncol = 50, byrow = T)
 steps = input[52:nrow(input), ]$x |>  strsplit("") |> unlist()
 
-# simulate the process moving the boxes 
-nrow = nrow(G)
-ncol = ncol(G)
+# Part I: 
 
 # update the state, and return the updated grid 
 take_step = function (grid, movement, part_2=FALSE) {
@@ -61,6 +59,7 @@ take_step = function (grid, movement, part_2=FALSE) {
     }
   
   }
+  
   if (room_to_move) {
     # set the spaces until the first open space as a box
     grid[(cr+dr) : nr, (cc+dc) : nc] = "O" 
@@ -69,30 +68,27 @@ take_step = function (grid, movement, part_2=FALSE) {
   }
   
   return(grid)
- 
 }
 
 # Simulate through the steps 
 for (i in 1:length(steps)) {
-  G <<- take_step(G, steps[i])
+  G <- take_step(G, steps[i])
 }
 
-# Part 1 
+
 coords = which(G == "O", arr.ind = T)
 sum((coords[, 1] - 1) * 100 + (coords[, 2] - 1)) # since R is 1 indexed 
 
 
 # Part II: 
 
-# need to update the grid 
-
+# update the grid for w i d e boxes 
 G = input[1:50, ]
 G = G$x
 G = gsub("#", "##", G)
 G = gsub("O", "[]", G)
 G = gsub("\\.", "\\..", G)
 G = gsub("@", "@.", G)
-
 G = strsplit(x = G, "") |> unlist() |> matrix(ncol = 50, byrow = T)
 
 #TODO: need to add in logic where we can use the wide boxes to push eachother if they're in contact 
